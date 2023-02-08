@@ -1,35 +1,40 @@
-import React, { useEffect, useState } from "react";
-import { useQuery, gql } from "@apollo/client";
+import React, { useState } from "react";
+import { gql, useLazyQuery } from "@apollo/client";
 
 const Countries = () => { 
+
+    const [countryCode, setCountryCode] = useState<string>('US');
     
-    const countriesQuery = gql`
+    const COUNTRIES_QUERY = gql`
     {
-        countries {
-          name,
-          code
+        country(code: "${countryCode}") {
+          name
+          native
+          capital
+          emoji
+          currency
+          languages {
+            code
+            name
+          }
         }
       }
   `;    
 
-   const { data, loading, error } = useQuery(countriesQuery);
-   const [countryCode, setCountryCode] = useState<string>;
+    const [getCountryDetails, { called, loading, data }] = useLazyQuery(COUNTRIES_QUERY);
 
-    function getCountryDetails() {
-        setCountryCode('BR'); 
-    }
-
-    useEffect(() => {
-
-    }), [countryCode];
+    const handleChange = (selectedOption: React.ChangeEvent<HTMLSelectElement>)  => {
+        setCountryCode(selectedOption.target.value);
+      };    
+ 
     return <div>Country&nbsp;
       <span>
-          <select>
+          <select  onChange={handleChange}>
             <option value='US'>United States</option>
             <option value='UA'>Ukraine</option>
           </select>
       </span>
-      <span><input type='button' value='submit' onClick={getCountryDetails}></input></span>
+      <span><input type='button' value='submit' onClick={() => getCountryDetails()}></input></span>
     </div>; 
 }
 
