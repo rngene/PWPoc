@@ -1,19 +1,27 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useQuery, gql } from "@apollo/client";
 
 const Countries = () => { 
-    const FILMS_QUERY = gql`
+    
+    const countriesQuery = gql`
     {
-      launchesPast(limit: 10) {
-        id
-        mission_name
+        countries {
+          name,
+          code
+        }
       }
-    }
   `;    
 
+   const { data, loading, error } = useQuery(countriesQuery);
+   const [countryCode, setCountryCode] = useState<string>;
+
     function getCountryDetails() {
-        alert('here');
+        setCountryCode('BR'); 
     }
+
+    useEffect(() => {
+
+    }), [countryCode];
     return <div>Country&nbsp;
       <span>
           <select>
