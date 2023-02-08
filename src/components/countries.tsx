@@ -4,22 +4,21 @@ import { gql, useLazyQuery } from "@apollo/client";
 const Countries = () => { 
 
     const [countryCode, setCountryCode] = useState<string>('US');
-    
+
     const COUNTRIES_QUERY = gql`
-    {
-        country(code: "${countryCode}") {
-          name
-          native
-          capital
-          emoji
-          currency
-          languages {
+    query Country($id: ID!) {
+        country(code: $id) {
+        name
+        native
+        capital
+        emoji
+        currency
+        languages {
             code
             name
-          }
         }
-      }
-  `;    
+        }
+    }`;
 
     const [getCountryDetails, { called, loading, data }] = useLazyQuery(COUNTRIES_QUERY);
 
@@ -34,7 +33,7 @@ const Countries = () => {
             <option value='UA'>Ukraine</option>
           </select>
       </span>
-      <span><input type='button' value='submit' onClick={() => getCountryDetails()}></input></span>
+      <span><input type='button' value='submit' onClick={() => getCountryDetails({ variables: { id: countryCode } })}></input></span>
     </div>; 
 }
 
