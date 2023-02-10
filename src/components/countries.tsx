@@ -29,9 +29,9 @@ const Countries = () => {
 
     const handleChange = (selectedOption: React.ChangeEvent<HTMLSelectElement>)  => {
         setCountryCode(selectedOption.target.value);
-      };    
+    };    
  
-    return <div>Country&nbsp;
+    return <div><label data-testid='country-label'>Country</label>
       <span>
           <select  onChange={handleChange}>
             <option value='US'>United States</option>
