@@ -1,17 +1,18 @@
 import { test, expect } from '@playwright/test';
+test.describe('Countries page', () => {
+    test('has title', async ({ page }) => {
+        await page.goto('/');
 
-test('has title', async ({ page }) => {
-  await page.goto('/');
+        // Expect a title "to contain" a substring.
+        await expect(page).toHaveTitle("Countries");
+    });
 
-  // Expect a title "to contain" a substring.
-  await expect(page).toHaveTitle("Countries");
-});
-
-test('has country label', async ({ page }) => {
-    await page.goto('/');
-  
-    // Make sure the list now has two todo items.
-    await expect(page.getByTestId('country-label')).toHaveText('Country');
+    test('has country label', async ({ page }) => {
+        await page.goto('/');
+    
+        // Make sure the list now has two todo items.
+        await expect(page.getByTestId('country-label')).toHaveText('Country');
+    });
 });
 
 // test('get started link', async ({ page }) => {

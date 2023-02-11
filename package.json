@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "pw": "npx playwright test --trace on",
+    "pw-report": "npx playwright show-report"
   },
   "dependencies": {
     "@apollo/client": "^3.7.7",
