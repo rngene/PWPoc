@@ -36,6 +36,7 @@ const Countries = () => {
           <select  onChange={handleChange}>
             <option value='US'>United States</option>
             <option value='UA'>Ukraine</option>
+			<option value='CU'>Cuba</option>
           </select>
       </span>
       <span><input type='button' value='submit' onClick={() => getCountryDetails({ variables: { id: countryCode } })}></input></span>
