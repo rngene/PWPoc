@@ -12,9 +12,7 @@ test.describe('Countries selection', () => {
         });
 
         await page.goto('/');
-
         await page.getByTestId('country-select').selectOption('UA');
-
         await page.getByTestId('submit-button').click();
 
         await expect(page.getByTestId('capital-label')).toHaveText('test capital');
