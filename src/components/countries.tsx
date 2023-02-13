@@ -1,3 +1,4 @@
+'use client'
 import React, { useEffect, useState } from "react";
 import { gql, useLazyQuery } from "@apollo/client";
 import Country from "@/models/country";
