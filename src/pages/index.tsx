@@ -2,7 +2,7 @@ import CountryListItem from '@/models/countryListItem';
 import { ApolloClient, InMemoryCache } from '@apollo/client';
 import { NextPageContext } from 'next';
 import Head from 'next/head'
-import { Countries } from '../components/countries'
+import { Countries, CountriesProps } from '../components/countries'
 
 
 
@@ -10,8 +10,8 @@ import { Countries } from '../components/countries'
   //   uri: "https://countries.trevorblades.com/graphql",
   //   cache: new InMemoryCache()
   // });  
-export default function Index(data) {
-  console.log("props:"+data.countryListIems[0].code);
+export default function Index(data: CountriesProps) {
+  console.log("props:"+data.countryListItems[0].code);
   return (
     <>
       <Head>
@@ -21,7 +21,7 @@ export default function Index(data) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
         <div>
-          <Countries countryListItems={data.countryListIems} ></Countries>
+          <Countries countryListItems={data.countryListItems} ></Countries>
         </div>
     </>
   );
@@ -44,7 +44,7 @@ export async function getServerSideProps(context: NextPageContext) {
 
   return {
       props: {
-        countryListIems : countryListIems
+        countryListItems : countryListIems
       }
     }
  }
