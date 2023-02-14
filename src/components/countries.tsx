@@ -9,27 +9,27 @@ export interface CountriesProps {
 }
 
 export const Countries : React.FC<CountriesProps> = (props : CountriesProps) => { 
+    interface CountryResult {
+        country:  Country;
+    };    
 
     const [countryCode, setCountryCode] = useState<string>(props.countryListItems[0].code);
     const [country, setCountry] = useState<Country|null>(null);
 
     const COUNTRIES_QUERY = gql`
-    query Country($id: ID!) {
-        country(code: $id) {
-        name
-        capital
-        currency
-       }
-    }`;
+        query Country($id: ID!) {
+            country(code: $id) {
+            name
+            capital
+            currency
+        }
+        }`;
 
-    const [getCountryDetails, { called, loading, data }] = useLazyQuery(COUNTRIES_QUERY);
-
+    const [getCountryDetails, { called, loading, data }] = useLazyQuery<CountryResult>(COUNTRIES_QUERY);
+    
     useEffect(() => {
         if (data) {
-            setCountry({
-                capital: data.country.capital,
-                currency: data.country.currency
-            });
+            setCountry(data.country);
         }
     },[data]);
 
