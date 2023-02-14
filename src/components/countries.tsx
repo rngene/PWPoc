@@ -2,8 +2,13 @@
 import React, { useEffect, useState } from "react";
 import { gql, useLazyQuery } from "@apollo/client";
 import Country from "@/models/country";
+import CountryListItem from "@/models/countryListItem";
 
-const Countries = () => { 
+export interface CountriesProps {
+    countryListItems: CountryListItem[]
+}
+
+export const Countries : React.FC<CountriesProps> = (props : CountriesProps) => { 
 
     const [countryCode, setCountryCode] = useState<string>('US');
     const [country, setCountry] = useState<Country|null>(null);
@@ -35,9 +40,11 @@ const Countries = () => {
     return <div><label data-testid='country-label'>Country</label>
       <span>
           <select  onChange={handleChange} data-testid='country-select'>
-            <option value='US'>United States</option>
-            <option value='UA'>Ukraine</option>
-			<option value='CU'>Cuba</option>
+            {props.countryListItems.map(c => {
+                return <option value={c.code} key={c.code}>{c.name}</option>
+            })}
+           
+
           </select>
       </span>
       <span><input type='button' value='submit' data-testid='submit-button' onClick={() => getCountryDetails({ variables: { id: countryCode } })}></input></span>
@@ -53,4 +60,3 @@ const Countries = () => {
     </div>; 
 }
 
-export default Countries;

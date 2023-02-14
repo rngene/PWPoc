@@ -1,6 +1,20 @@
+import CountryListItem from '@/models/countryListItem';
 import Head from 'next/head'
-import Countries from '../components/countries'
+import { Countries } from '../components/countries'
 export default function Home() {
+
+  const countryListIems : CountryListItem[] = 
+    [
+      {
+        code: 'US',
+        name: 'United States of America'
+      },
+      {
+        code: 'UA',
+        name: 'UKraine'
+      },
+    ]
+  ;
   return (
     <>
       <Head>
@@ -10,7 +24,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
         <div>
-          <Countries></Countries>
+          <Countries countryListItems={countryListIems} ></Countries>
         </div>
     </>
   )
