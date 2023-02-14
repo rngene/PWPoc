@@ -10,7 +10,7 @@ export interface CountriesProps {
 
 export const Countries : React.FC<CountriesProps> = (props : CountriesProps) => { 
 
-    const [countryCode, setCountryCode] = useState<string>('US');
+    const [countryCode, setCountryCode] = useState<string>(props.countryListItems[0].code);
     const [country, setCountry] = useState<Country|null>(null);
 
     const COUNTRIES_QUERY = gql`

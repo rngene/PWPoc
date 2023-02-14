@@ -1,17 +1,10 @@
 import CountryListItem from '@/models/countryListItem';
-import { ApolloClient, InMemoryCache } from '@apollo/client';
+import { ApolloClient, gql, InMemoryCache } from '@apollo/client';
 import { NextPageContext } from 'next';
 import Head from 'next/head'
 import { Countries, CountriesProps } from '../components/countries'
 
-
-
-  // const client = new ApolloClient({
-  //   uri: "https://countries.trevorblades.com/graphql",
-  //   cache: new InMemoryCache()
-  // });  
 export default function Index(data: CountriesProps) {
-  console.log("props:"+data.countryListItems[0].code);
   return (
     <>
       <Head>
@@ -28,19 +21,27 @@ export default function Index(data: CountriesProps) {
 }
 
 export async function getServerSideProps(context: NextPageContext) {
-  console.log("Invoked");
+  const countryListIems : CountryListItem[] = [];
+  
+  const client = new ApolloClient({
+    uri: "http://countries.trevorblades.com/graphql",
+    cache: new InMemoryCache()
+  });   
 
-  const countryListIems : CountryListItem[] = 
-    [
-      {
-        code: 'US',
-        name: 'United States of America'
-      },
-      {
-        code: 'UA',
-        name: 'UKraine'
-      },
-    ];  
+  const { data } = await client.query({
+    query: gql`
+      query {
+        countries {
+          name,
+          code
+        }
+      }
+    `,
+  });  
+
+  data.countries.map(c => {
+    countryListIems.push({ code: c.code, name: c.name});
+  });
 
   return {
       props: {
