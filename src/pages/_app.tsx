@@ -9,9 +9,7 @@ export default function App({ Component, pageProps }: AppProps) {
 });
   return <>
   <ApolloProvider client={client}>
-    {/* <Countries></Countries> */}
     <Component {...pageProps} />
-     
   </ApolloProvider> 
   </>
 }
