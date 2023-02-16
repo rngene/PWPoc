@@ -4,7 +4,7 @@ test.describe('Countries selection', () => {
 
         await page.route('https://countries.trevorblades.com/graphql', async route => {
             if (route!.request()!.postData()!.includes('{"id":"UA"}')) {
-                const json = {"data":{"country":{"name":"test country","capital":"test capital","currency":"test currency","__typename":"Country"}}};
+                const json = {"data":{"country":{"name":"test country","capital":"test capital1","currency":"test currency1","__typename":"Country"}}};
                 await route.fulfill({ json });
             } else {
                 route.abort();
@@ -15,7 +15,7 @@ test.describe('Countries selection', () => {
         await page.getByTestId('country-select').selectOption('UA');
         await page.getByTestId('submit-button').click();
 
-        await expect(page.getByTestId('capital-label')).toHaveText('test capital');
-        await expect(page.getByTestId('currency-label')).toHaveText('test currency');
+        await expect(page.getByTestId('capital-label')).toHaveText('test capital1');
+        await expect(page.getByTestId('currency-label')).toHaveText('test currency1');
     });
 });
