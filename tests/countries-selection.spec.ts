@@ -1,11 +1,14 @@
 import { test, expect } from '@playwright/test';
+
+import testCountry from '../src/mocks/testCountry.json'
+
 test.describe('Countries selection', () => {
     test('populates properties correctly', async ({ page }) => {
-
         await page.route('https://countries.trevorblades.com/graphql', async route => {
             if (route!.request()!.postData()!.includes('{"id":"UA"}')) {
-                const json = {"data":{"country":{"name":"test country","capital":"test capital","currency":"test currency","__typename":"Country"}}};
-                await route.fulfill({ json });
+                await route.fulfill({
+                    body: JSON.stringify(testCountry)
+                });
             } else {
                 route.abort();
             }
