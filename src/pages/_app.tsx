@@ -1,4 +1,4 @@
-import '@/styles/globals.css'
+import '@/styles/pwpoc.css'
 import type { AppProps } from 'next/app'
 import { ApolloProvider, ApolloClient, InMemoryCache } from "@apollo/client";
 

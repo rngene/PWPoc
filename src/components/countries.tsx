@@ -37,26 +37,22 @@ export const Countries : React.FC<CountriesProps> = (props : CountriesProps) => 
         setCountryCode(selectedOption.target.value);
     };    
  
-    return <div><label data-testid='country-label'>Country</label>
+    return <div className="main"><label data-testid='country-label'>Country</label>
       <span>
           <select  onChange={handleChange} data-testid='country-select'>
             {props.countryListItems.map(c => {
                 return <option value={c.code} key={c.code}>{c.name}</option>
             })}
-           
-
           </select>
       </span>
-      <span><input type='button' value='submit' data-testid='submit-button' onClick={() => getCountryDetails({ variables: { id: countryCode } })}></input></span>
+      <input type='button' value='Get Details' data-testid='submit-button' onClick={() => getCountryDetails({ variables: { id: countryCode } })}></input>
       {country ? 
          <>
-         <div>&nbsp;</div>
-            <div>Capital: <label data-testid='capital-label'>{country.capital}</label></div>
-            <div>Currency: <label data-testid='currency-label'>{country.currency}</label></div>
+          <label>Capital</label><label className='result' data-testid='capital-label'>{country.capital}</label>
+          <label>Currency</label><label className='result' data-testid='currency-label'>{country.currency}</label>
          </>
         : 
          <></> }
-      
     </div>; 
 }
 

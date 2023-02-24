@@ -1,4 +1,29 @@
 body {
-    margin-left: 10px;
-    margin-right: 10px;
+    margin-left: 20px;
+    margin-top: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+  .main {
+    display: grid;
+    grid-template-columns: 70px auto auto 100%;
+    column-gap: 10px;
+    row-gap: 10px;
+  }
+
+  label {
+    grid-column: 1;
+  }
+
+  span {
+    grid-column: 2;
+  }  
+
+  input {
+    grid-column: 3;
+  }
+
+  .result {
+    color:red;
+    grid-column: 2;
   }
