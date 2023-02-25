@@ -25,7 +25,7 @@ export const Countries : React.FC<CountriesProps> = (props : CountriesProps) => 
         }
         }`;
 
-    const [getCountryDetails, { called, loading, data }] = useLazyQuery<CountryResult>(COUNTRIES_QUERY);
+    const [getCountryDetails, { data }] = useLazyQuery<CountryResult>(COUNTRIES_QUERY);
     
     useEffect(() => {
         if (data) {
