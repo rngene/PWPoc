@@ -33,19 +33,23 @@ export const Countries : React.FC<CountriesProps> = (props : CountriesProps) => 
         }
     },[data]);
 
-    const handleChange = (selectedOption: React.ChangeEvent<HTMLSelectElement>)  => {
+    const countryChangeHandler = (selectedOption: React.ChangeEvent<HTMLSelectElement>)  => {
         setCountryCode(selectedOption.target.value);
-    };    
+    };   
+    
+    const getDetailsClickHandler = () => {
+        getCountryDetails({ variables: { id: countryCode } });
+    }
  
     return <div className="main"><label data-testid='country-label'>Country</label>
       <span>
-          <select  onChange={handleChange} data-testid='country-select'>
+          <select  onChange={countryChangeHandler} data-testid='country-select'>
             {props.countryListItems.map(c => {
                 return <option value={c.code} key={c.code}>{c.name}</option>
             })}
           </select>
       </span>
-      <input type='button' value='Get Details' data-testid='submit-button' onClick={() => getCountryDetails({ variables: { id: countryCode } })}></input>
+      <input type='button' value='Get Details' data-testid='submit-button' onClick={getDetailsClickHandler}></input>
       {country ? 
          <>
           <label>Capital</label><label className='result' data-testid='capital-label'>{country.capital}</label>
