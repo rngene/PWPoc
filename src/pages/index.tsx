@@ -4,14 +4,11 @@ import { NextPageContext } from 'next';
 import Head from 'next/head'
 import { Countries, CountriesProps } from '../components/countries'
 
-function getClient() : ApolloClient<NormalizedCacheObject> {
-  const client = new ApolloClient({
-    uri: "https://countries.trevorblades.com/graphql",
-    cache: new InMemoryCache()
-  });  
 
-  return client;
-}
+const client = new ApolloClient({
+  uri: "https://countries.trevorblades.com/graphql",
+  cache: new InMemoryCache()
+});  
 
 export default function Index(data: CountriesProps) {
   return (
@@ -23,7 +20,7 @@ export default function Index(data: CountriesProps) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
         <div>
-         <ApolloProvider client={getClient()}>
+         <ApolloProvider client={client}>
            <Countries countryListItems={data.countryListItems} ></Countries>
          </ApolloProvider>
         </div>
@@ -37,7 +34,7 @@ export async function getServerSideProps(context: NextPageContext) {
     countries:  CountryListItem[];
   };
 
-  const { data } = await getClient().query<CountriesResult>({
+  const { data } = await client.query<CountriesResult>({
     query: gql`
       query {
         countries {
