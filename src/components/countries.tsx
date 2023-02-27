@@ -19,10 +19,9 @@ export const Countries : React.FC<CountriesProps> = (props : CountriesProps) => 
     const COUNTRIES_QUERY = gql`
         query Country($id: ID!) {
             country(code: $id) {
-            name
             capital
             currency
-        }
+           }
         }`;
 
     const [getCountryDetails, { data }] = useLazyQuery<CountryResult>(COUNTRIES_QUERY);
