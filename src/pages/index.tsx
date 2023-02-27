@@ -1,13 +1,24 @@
 import CountryListItem from '@/models/countryListItem';
-import { ApolloClient, ApolloProvider, gql, InMemoryCache, NormalizedCacheObject } from '@apollo/client';
+import { ApolloClient, ApolloProvider, DefaultOptions, gql, InMemoryCache, NormalizedCacheObject } from '@apollo/client';
 import { NextPageContext } from 'next';
 import Head from 'next/head'
 import { Countries, CountriesProps } from '../components/countries'
 
+const defaultOptions: DefaultOptions = {
+  watchQuery: {
+    fetchPolicy: 'no-cache',
+    errorPolicy: 'ignore',
+  },
+  query: {
+    fetchPolicy: 'no-cache',
+    errorPolicy: 'all',
+  },
+}
 
 const client = new ApolloClient({
   uri: "https://countries.trevorblades.com/graphql",
-  cache: new InMemoryCache()
+  cache: new InMemoryCache(),
+  defaultOptions: defaultOptions
 });  
 
 export default function Index(data: CountriesProps) {
