@@ -1,5 +1,5 @@
 import { getMockedCountries } from '@/mocks/countries';
-import CountryListItem from '@/models/countryListItem';
+import Country from '@/models/country';
 import { ApolloClient, ApolloProvider, DefaultOptions, gql, InMemoryCache, NormalizedCacheObject } from '@apollo/client';
 import { NextPageContext } from 'next';
 import Head from 'next/head'
@@ -52,7 +52,7 @@ export async function getServerSideProps(context: NextPageContext) {
   }
 
   interface CountriesResult {
-    countries:  CountryListItem[];
+    countries:  Country[];
   };
 
   const { data } = await client.query<CountriesResult>({

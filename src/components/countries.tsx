@@ -1,20 +1,20 @@
 'use client'
 import React, { useEffect, useState } from "react";
 import { gql, useLazyQuery } from "@apollo/client";
+import CountryDetails from "@/models/countryDetails";
 import Country from "@/models/country";
-import CountryListItem from "@/models/countryListItem";
 
 export interface CountriesProps {
-    countryListItems: CountryListItem[]
+    countryListItems: Country[]
 }
 
 export const Countries : React.FC<CountriesProps> = (props : CountriesProps) => { 
     interface CountryResult {
-        country:  Country;
+        country:  CountryDetails;
     };    
 
     const [countryCode, setCountryCode] = useState<string>(props.countryListItems[0].code);
-    const [country, setCountry] = useState<Country|null>(null);
+    const [countryDetails, setCountryDetails] = useState<CountryDetails|null>(null);
 
     const COUNTRIES_QUERY = gql`
         query Country($id: ID!) {
@@ -28,7 +28,7 @@ export const Countries : React.FC<CountriesProps> = (props : CountriesProps) => 
     
     useEffect(() => {
         if (data) {
-            setCountry(data.country);
+            setCountryDetails(data.country);
         }
     },[data]);
 
@@ -49,10 +49,10 @@ export const Countries : React.FC<CountriesProps> = (props : CountriesProps) => 
           </select>
       </span>
       <input type='button' value='Get Details' data-testid='submit-button' onClick={getDetailsClickHandler}></input>
-      {country ? 
+      {countryDetails ? 
          <>
-          <label>Capital</label><label className='result' data-testid='capital-label'>{country.capital}</label>
-          <label>Currency</label><label className='result' data-testid='currency-label'>{country.currency}</label>
+          <label>Capital</label><label className='result' data-testid='capital-label'>{countryDetails.capital}</label>
+          <label>Currency</label><label className='result' data-testid='currency-label'>{countryDetails.currency}</label>
          </>
         : 
          <></> }

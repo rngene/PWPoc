@@ -1,6 +1,6 @@
 interface Country {
-    capital: string,
-    currency: string
+    code: string,
+    name: string
 }
 
 export default Country;

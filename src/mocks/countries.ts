@@ -1,6 +1,6 @@
-import CountryListItem from "@/models/countryListItem"
+import Country from "@/models/country"
 
-export function getMockedCountries() : CountryListItem[] {
+export function getMockedCountries() : Country[] {
   return [
     {
       name: "Test country 1",
