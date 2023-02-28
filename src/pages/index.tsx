@@ -4,7 +4,6 @@ import { ApolloClient, ApolloProvider, DefaultOptions, gql, InMemoryCache, Norma
 import { NextPageContext } from 'next';
 import Head from 'next/head'
 import { Countries, CountriesProps } from '../components/countries'
-import countries from '../mocks/testCountry.json'
 
 const defaultOptions: DefaultOptions = {
   watchQuery: {
