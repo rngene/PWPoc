@@ -1,8 +1,10 @@
+import { getMockedCountries } from '@/mocks/countries';
 import CountryListItem from '@/models/countryListItem';
 import { ApolloClient, ApolloProvider, DefaultOptions, gql, InMemoryCache, NormalizedCacheObject } from '@apollo/client';
 import { NextPageContext } from 'next';
 import Head from 'next/head'
 import { Countries, CountriesProps } from '../components/countries'
+import countries from '../mocks/testCountry.json'
 
 const defaultOptions: DefaultOptions = {
   watchQuery: {
@@ -40,6 +42,14 @@ export default function Index(data: CountriesProps) {
 }
 
 export async function getServerSideProps(context: NextPageContext) {
+
+  if (process.env.PLAYWRIGHT_TEST_BASE_URL !== undefined) {
+    return {
+      props: {
+        countryListItems: getMockedCountries()
+      }
+    }
+  }
 
   interface CountriesResult {
     countries:  CountryListItem[];
