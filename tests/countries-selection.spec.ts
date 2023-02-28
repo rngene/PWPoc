@@ -18,6 +18,9 @@ test.describe('Countries selection', () => {
         const request = await requestPromise; 
 
         expect(request.postData()).toContain('{"id":"T2"}');
+        expect(request.postData()).toContain('capital');
+        expect(request.postData()).toContain('currency');
+        
         await expect(page.getByTestId('capital-label')).toHaveText('test capital');
         await expect(page.getByTestId('currency-label')).toHaveText('test currency');
 
