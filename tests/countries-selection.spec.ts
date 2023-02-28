@@ -3,7 +3,6 @@ import country from '../src/mocks/country.json'
 
 test.describe('Countries selection', () => {
     test('populates properties correctly', async ({ page }) => {
-   
         await page.route('https://countries.trevorblades.com/graphql', async route => {
             await route.fulfill({
                 body: JSON.stringify(country)
@@ -20,10 +19,8 @@ test.describe('Countries selection', () => {
         expect(request.postData()).toContain('{"id":"T2"}');
         expect(request.postData()).toContain('capital');
         expect(request.postData()).toContain('currency');
-        
+
         await expect(page.getByTestId('capital-label')).toHaveText('test capital');
         await expect(page.getByTestId('currency-label')).toHaveText('test currency');
-
-        await page.getByTestId('submit-button').click();
     });
 });
