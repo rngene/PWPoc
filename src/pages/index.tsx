@@ -1,4 +1,4 @@
-import { getMockedCountries } from '@/mocks/countries';
+import { getMockedCountries } from 'tests/mocks/countries';
 import Country from '@/models/country';
 import { ApolloClient, ApolloProvider, DefaultOptions, gql, InMemoryCache, NormalizedCacheObject } from '@apollo/client';
 import { NextPageContext } from 'next';
