@@ -21,6 +21,7 @@ export const Countries : React.FC<CountriesProps> = (props : CountriesProps) => 
             country(code: $id) {
             capital
             currency
+            phone
            }
         }`;
 
@@ -53,6 +54,7 @@ export const Countries : React.FC<CountriesProps> = (props : CountriesProps) => 
          <>
           <label>Capital</label><label className='result' data-testid='capital-label'>{countryDetails.capital}</label>
           <label>Currency</label><label className='result' data-testid='currency-label'>{countryDetails.currency}</label>
+          <label>Phone</label><label className='result' data-testid='phone-label'>{countryDetails.phone}</label>
          </>
         : 
          <></> }

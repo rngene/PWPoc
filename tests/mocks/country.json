@@ -4,6 +4,7 @@
       "name": "test country",
       "capital": "test capital",
       "currency": "test currency",
+      "phone": "123",
       "__typename": "Country"
     }
   }
