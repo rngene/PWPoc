@@ -7,11 +7,11 @@ import { Countries, CountriesProps } from '../components/countries'
 
 const defaultOptions: DefaultOptions = {
   watchQuery: {
-    fetchPolicy: 'no-cache',
+    fetchPolicy: 'cache-first',
     errorPolicy: 'ignore',
   },
   query: {
-    fetchPolicy: 'no-cache',
+    fetchPolicy: 'cache-first',
     errorPolicy: 'all',
   },
 }
