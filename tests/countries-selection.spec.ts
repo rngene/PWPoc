@@ -19,8 +19,10 @@ test.describe('Countries selection', () => {
         expect(request.postData()).toContain('{"id":"T2"}');
         expect(request.postData()).toContain('capital');
         expect(request.postData()).toContain('currency');
+        expect(request.postData()).toContain('phone');
 
         await expect(page.getByTestId('capital-label')).toHaveText('test capital');
         await expect(page.getByTestId('currency-label')).toHaveText('test currency');
+        await expect(page.getByTestId('phone-label')).toHaveText('123');
     });
 });
