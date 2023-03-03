@@ -25,7 +25,7 @@ export const Countries : React.FC<CountriesProps> = (props : CountriesProps) => 
            }
         }`;
 
-    const [getCountryDetails, { data }] = useLazyQuery<CountryResult>(COUNTRIES_QUERY);
+    const [getCountryDetails, { data, error }] = useLazyQuery<CountryResult>(COUNTRIES_QUERY);
     
     useEffect(() => {
         if (data) {
@@ -57,7 +57,14 @@ export const Countries : React.FC<CountriesProps> = (props : CountriesProps) => 
           <label>Phone</label><label className='result' data-testid='phone-label'>{countryDetails.phone}</label>
          </>
         : 
-         <></> }
+         <>
+         { (error !== undefined) ?
+         <label className='error' data-testid='error-label'>Sorry an error has occurred</label> 
+         : <></>
+         
+         }
+         </>
+      }
     </div>; 
 }
 
