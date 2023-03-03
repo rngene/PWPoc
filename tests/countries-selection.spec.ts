@@ -42,5 +42,30 @@ test.describe('Countries selection', () => {
 
         await expect(page.getByTestId('error-label')).toBeVisible();
 
+    });   
+    
+    test('caches graph call', async ({ page }) => {
+        let numberOfRequests=0;
+
+        page.on('request', data => {
+            if (data.url()==='https://countries.trevorblades.com/graphql') {
+                numberOfRequests++;
+            }
+
+        });
+        await page.route('https://countries.trevorblades.com/graphql', async route => {
+            await route.fulfill({
+                body: JSON.stringify(country)
+            });            
+        });
+
+        await page.goto('/');
+             
+        await page.getByTestId('submit-button').click();
+        await page.getByTestId('submit-button').click();
+
+        expect(numberOfRequests).toBe(1);
+       
+
     });    
 });
