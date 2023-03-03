@@ -25,4 +25,22 @@ test.describe('Countries selection', () => {
         await expect(page.getByTestId('currency-label')).toHaveText('test currency');
         await expect(page.getByTestId('phone-label')).toHaveText('123');
     });
+
+    test('shows error when graph call fails', async ({ page }) => {
+        await page.route('https://countries.trevorblades.com/graphql', async route => {
+            await route.fulfill({
+                status: 500,
+                body: '{}'
+            });            
+        });
+
+        await page.goto('/');
+
+        await expect(page.getByTestId('error-label')).toBeHidden();
+        
+        await page.getByTestId('submit-button').click();
+
+        await expect(page.getByTestId('error-label')).toBeVisible();
+
+    });    
 });

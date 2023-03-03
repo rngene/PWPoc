@@ -27,3 +27,7 @@ body {
     color:red;
     grid-column: 2;
   }
+
+  .error {
+    grid-column: 1/ span 3;
+  }
