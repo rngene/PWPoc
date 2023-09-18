@@ -1,5 +1,6 @@
-import { test, expect } from '@playwright/test';
+import { test, expect } from 'playwright-test-coverage';
 import country from './mocks/country.json'
+
 
 test.describe('Countries selection', () => {
     test('populates properties correctly', async ({ page }) => {
